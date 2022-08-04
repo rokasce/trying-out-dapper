@@ -23,8 +23,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IDbConnectionFactory>(_ =>
     new NpgsqlConnectionFactory(config.GetValue<string>("Database:ConnectionString")));
 builder.Services.AddSingleton<DatabaseInitializer>();
+
+// Repositories
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddSingleton<IPostRepository, PostRespository>();
+
+// Services
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<IPostService, PostService>();
 
 var app = builder.Build();
 

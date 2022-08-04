@@ -1,17 +1,16 @@
 ﻿using API.Contracts.Data;
 
-namespace API.Repositories
+namespace API.Repositories;
+
+public interface IUserRepository
 {
-    public interface IUserRepository
-    {
-        Task<bool> CreateAsync(UserDto user);
+    Task<bool> CreateAsync(UserDto user);
 
-        Task<UserDto?> GetAsync(Guid id);
+    Task<UserDto?> GetAsync(Guid id);
 
-        Task<IEnumerable<UserDto>> GetAllAsync();
+    Task<IEnumerable<UserDto>> GetAllAsync();
 
-        Task<bool> UpdateAsync(UserDto user);
+    Task<bool> UpdateAsync(UserDto user);
 
-        Task<bool> DeleteAsync(Guid id);
-    }
+    Task<bool> DeleteAsync(Guid id);
 }

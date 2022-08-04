@@ -16,5 +16,16 @@ public static class DtoToDomainMapper
             DateOfBirth = DateOfBirth.From(DateOnly.FromDateTime(userDto.DateOfBirth))
         };
     }
+
+    public static Post ToPost(this PostDto postDto)
+    {
+        return new Post
+        {
+            Id = UserId.From(postDto.Id),
+            UserId = UserId.From(postDto.UserId),
+            Title = Title.From(postDto.Title),
+            Content = Title.From(postDto.Content),
+        };
+    }
 }
 

@@ -27,5 +27,27 @@ public static class ApiContractToDomainMapper
             DateOfBirth = DateOfBirth.From(DateOnly.FromDateTime(request.User.DateOfBirth))
         };
     }
+
+    public static Post ToPost(this PostRequest request)
+    {
+        return new Post
+        {
+            Id = UserId.From(Guid.NewGuid()),
+            UserId = UserId.From(request.UserId),
+            Title = Title.From(request.Title),
+            Content = Title.From(request.Content),
+        };
+    }
+
+    public static Post ToPost(this UpdatePostRequest request)
+    {
+        return new Post
+        {
+            Id = UserId.From(request.Id),
+            UserId = UserId.From(request.Post.UserId),
+            Title = Title.From(request.Post.Title),
+            Content = Title.From(request.Post.Content),
+        };
+    }
 }
 

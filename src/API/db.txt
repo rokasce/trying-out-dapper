@@ -1,0 +1,1 @@
+﻿docker run --name ERCE_DB -e POSTGRES_USER=erce -e POSTGRES_PASSWORD=Test1234! -p 5432:5432 -d postgres

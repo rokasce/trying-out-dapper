@@ -29,5 +29,30 @@ public static class DomainToApiContractMapper
             })
         };
     }
+
+    public static PostResponse ToPostResponse(this Post post)
+    {
+        return new PostResponse
+        {
+            Id = post.Id.Value,
+            UserId = post.UserId.Value,
+            Title = post.Title.Value,
+            Content = post.Content.Value,
+        };
+    }
+
+    public static GetAllPostsResponse ToPostsResponse(this IEnumerable<Post> posts)
+    {
+        return new GetAllPostsResponse
+        {
+            Posts = posts.Select(post => new PostResponse
+            {
+                Id = post.Id.Value,
+                UserId = post.UserId.Value,
+                Title = post.Title.Value,
+                Content = post.Content.Value,
+            })
+        };
+    }
 }
 

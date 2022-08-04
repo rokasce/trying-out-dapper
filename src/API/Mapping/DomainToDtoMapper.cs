@@ -15,5 +15,16 @@ public static class DomainToDtoMapper
             DateOfBirth = user.DateOfBirth.Value.ToDateTime(TimeOnly.MinValue)
         };
     }
+
+    public static PostDto ToPostDto(this Post post) 
+    {
+        return new PostDto
+        {
+            Id = post.Id.Value,
+            UserId = post.UserId.Value,
+            Title = post.Title.Value,
+            Content = post.Content.Value,
+        };
+    }
 }
 
