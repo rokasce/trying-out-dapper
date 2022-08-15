@@ -2,13 +2,11 @@
 
 namespace API.Domain;
 
-public class Post
+public class Post: BaseEntity
 {
-    public UserId Id { get; init; } = UserId.From(Guid.NewGuid());
-    
-    public UserId UserId { get; init; } = UserId.From(Guid.NewGuid());
+    public Id UserId { get; init; } = Id.From(Guid.NewGuid());
 
     public Title Title { get; init; } = default!;
 
-    public Title Content { get; init; } = default!;
+    public Content Content { get; init; } = default!;
 }

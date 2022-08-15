@@ -10,7 +10,7 @@ public static class ApiContractToDomainMapper
     {
         return new User
         {
-            Id = UserId.From(Guid.NewGuid()),
+            Id = Id.From(Guid.NewGuid()),
             Email = Email.From(request.Email),
             FullName = FullName.From(request.FullName),
             DateOfBirth = DateOfBirth.From(DateOnly.FromDateTime(request.DateOfBirth))
@@ -21,7 +21,7 @@ public static class ApiContractToDomainMapper
     {
         return new User
         {
-            Id = UserId.From(request.Id),
+            Id = Id.From(request.Id),
             Email = Email.From(request.User.Email),
             FullName = FullName.From(request.User.FullName),
             DateOfBirth = DateOfBirth.From(DateOnly.FromDateTime(request.User.DateOfBirth))
@@ -32,10 +32,10 @@ public static class ApiContractToDomainMapper
     {
         return new Post
         {
-            Id = UserId.From(Guid.NewGuid()),
-            UserId = UserId.From(request.UserId),
+            Id = Id.From(Guid.NewGuid()),
+            UserId = Id.From(request.UserId),
             Title = Title.From(request.Title),
-            Content = Title.From(request.Content),
+            Content = Content.From(request.Content),
         };
     }
 
@@ -43,10 +43,10 @@ public static class ApiContractToDomainMapper
     {
         return new Post
         {
-            Id = UserId.From(request.Id),
-            UserId = UserId.From(request.Post.UserId),
+            Id = Id.From(request.Id),
+            UserId = Id.From(request.Post.UserId),
             Title = Title.From(request.Post.Title),
-            Content = Title.From(request.Post.Content),
+            Content = Content.From(request.Post.Content),
         };
     }
 }

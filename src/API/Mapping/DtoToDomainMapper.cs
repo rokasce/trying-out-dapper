@@ -10,7 +10,7 @@ public static class DtoToDomainMapper
     {
         return new User
         {
-            Id = UserId.From(userDto.Id),
+            Id = Id.From(userDto.Id),
             Email = Email.From(userDto.Email),
             FullName = FullName.From(userDto.FullName),
             DateOfBirth = DateOfBirth.From(DateOnly.FromDateTime(userDto.DateOfBirth))
@@ -21,10 +21,10 @@ public static class DtoToDomainMapper
     {
         return new Post
         {
-            Id = UserId.From(postDto.Id),
-            UserId = UserId.From(postDto.UserId),
+            Id = Id.From(postDto.Id),
+            UserId = Id.From(postDto.UserId),
             Title = Title.From(postDto.Title),
-            Content = Title.From(postDto.Content),
+            Content = Content.From(postDto.Content),
         };
     }
 }

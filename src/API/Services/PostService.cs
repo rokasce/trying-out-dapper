@@ -41,6 +41,13 @@ public class PostService : IPostService
         return postDtos.Select(x => x.ToPost());
     }
 
+    public async Task<IEnumerable<Post>> GetAllUsersPostsAsync(Guid userId)
+    {
+        var postDtos = await _postRepository.GetUserPosts(userId);
+
+        return postDtos.Select(x => x.ToPost());
+    }
+
     public async Task<Post?> GetAsync(Guid id)
     {
         var postDto = await _postRepository.GetAsync(id);

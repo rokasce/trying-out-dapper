@@ -13,4 +13,6 @@ public interface IPostRepository
     Task<bool> UpdateAsync(PostDto post);
 
     Task<bool> DeleteAsync(Guid id);
+
+    Task<IEnumerable<PostDto>> GetUserPosts(Guid userId);
 }

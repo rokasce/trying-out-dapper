@@ -48,6 +48,13 @@ public class PostRespository : IPostRepository
             .QuerySingleOrDefaultAsync<PostDto>(@"SELECT * FROM Posts WHERE Id = @Id LIMIT 1", new { Id = id });
     }
 
+    public async Task<IEnumerable<PostDto>> GetUserPosts(Guid userId)
+    {
+        var connection = await _connectionFactory.CreateConnectionAsync();
+        return await connection
+            .QueryAsync<PostDto>(@"SELECT * FROM Posts WHERE Id = @Id", new { Id = userId });
+    }
+
     public async Task<bool> UpdateAsync(PostDto post)
     {
         var connection = await _connectionFactory.CreateConnectionAsync();   

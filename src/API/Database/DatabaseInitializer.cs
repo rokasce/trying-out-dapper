@@ -25,6 +25,6 @@ public class DatabaseInitializer
         UserId UUID NOT NULL,
         Title TEXT NOT NULL,
         Content TEXT NOT NULL,
-        CONSTRAINT fk_user FOREIGN KEY(UserId) REFERENCES USERS(ID))");
+        CONSTRAINT fk_user FOREIGN KEY(UserId) REFERENCES USERS(ID) ON DELETE CASCADE)");
     }
 }
