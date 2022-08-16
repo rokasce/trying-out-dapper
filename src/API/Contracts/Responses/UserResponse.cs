@@ -8,4 +8,6 @@ public class UserResponse
     public string Email{ get; init; } = default!;
     
     public DateTime DateOfBirth { get; init; } = default!;
+
+    public DateTime CreatedAt { get; init; } = default!;
 }

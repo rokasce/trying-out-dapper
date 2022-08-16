@@ -13,7 +13,8 @@ public static class ApiContractToDomainMapper
             Id = Id.From(Guid.NewGuid()),
             Email = Email.From(request.Email),
             FullName = FullName.From(request.FullName),
-            DateOfBirth = DateOfBirth.From(DateOnly.FromDateTime(request.DateOfBirth))
+            DateOfBirth = DateCreated.From(request.DateOfBirth),
+            CreatedAt = DateCreated.From(DateTime.UtcNow),
         };
     }
 
@@ -24,7 +25,7 @@ public static class ApiContractToDomainMapper
             Id = Id.From(request.Id),
             Email = Email.From(request.User.Email),
             FullName = FullName.From(request.User.FullName),
-            DateOfBirth = DateOfBirth.From(DateOnly.FromDateTime(request.User.DateOfBirth))
+            DateOfBirth = DateCreated.From(request.User.DateOfBirth)
         };
     }
 
@@ -36,6 +37,7 @@ public static class ApiContractToDomainMapper
             UserId = Id.From(request.UserId),
             Title = Title.From(request.Title),
             Content = Content.From(request.Content),
+            CreatedAt = DateCreated.From(DateTime.UtcNow),
         };
     }
 

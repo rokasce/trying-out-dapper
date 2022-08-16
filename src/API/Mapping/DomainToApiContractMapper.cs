@@ -12,7 +12,8 @@ public static class DomainToApiContractMapper
             Id = customer.Id.Value,
             Email = customer.Email.Value,
             FullName = customer.FullName.Value,
-            DateOfBirth = customer.DateOfBirth.Value.ToDateTime(TimeOnly.MinValue)
+            DateOfBirth = customer.DateOfBirth.Value,
+            CreatedAt = customer.CreatedAt.Value
         };
     }
 
@@ -25,7 +26,8 @@ public static class DomainToApiContractMapper
                 Id = x.Id.Value,
                 Email = x.Email.Value,
                 FullName = x.FullName.Value,
-                DateOfBirth = x.DateOfBirth.Value.ToDateTime(TimeOnly.MinValue)
+                DateOfBirth = x.DateOfBirth.Value,
+                CreatedAt = x.CreatedAt.Value
             })
         };
     }
@@ -38,6 +40,7 @@ public static class DomainToApiContractMapper
             UserId = post.UserId.Value,
             Title = post.Title.Value,
             Content = post.Content.Value,
+            CreatedAt = post.CreatedAt.Value
         };
     }
 
@@ -51,6 +54,7 @@ public static class DomainToApiContractMapper
                 UserId = post.UserId.Value,
                 Title = post.Title.Value,
                 Content = post.Content.Value,
+                CreatedAt = post.CreatedAt.Value
             })
         };
     }

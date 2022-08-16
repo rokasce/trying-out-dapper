@@ -9,4 +9,6 @@ public class UserDto
     public string Email { get; set; } = default!;
 
     public DateTime DateOfBirth { get; init; }
+
+    public DateTime CreatedAt { get; init; }
 }

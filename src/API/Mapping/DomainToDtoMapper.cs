@@ -12,7 +12,8 @@ public static class DomainToDtoMapper
             Id = user.Id.Value,
             FullName = user.FullName.Value,
             Email = user.Email.Value,
-            DateOfBirth = user.DateOfBirth.Value.ToDateTime(TimeOnly.MinValue)
+            DateOfBirth = user.DateOfBirth.Value,
+            CreatedAt = user.CreatedAt.Value,
         };
     }
 
@@ -24,6 +25,7 @@ public static class DomainToDtoMapper
             UserId = post.UserId.Value,
             Title = post.Title.Value,
             Content = post.Content.Value,
+            CreatedAt = post.CreatedAt.Value,
         };
     }
 }

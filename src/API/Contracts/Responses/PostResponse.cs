@@ -9,4 +9,6 @@ public class PostResponse
     public string Title { get; init; } = default!;
 
     public string Content { get; init; } = default!;
+
+    public DateTime CreatedAt { get; init; } = default!;
 }

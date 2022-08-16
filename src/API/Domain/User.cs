@@ -8,7 +8,7 @@ public class User : BaseEntity
 
     public Email Email { get; init; } = default!;
     
-    public DateOfBirth DateOfBirth { get; init; } = default!;
+    public DateCreated DateOfBirth { get; init; } = default!;
 
     public List<Post> Posts { get; init; } = new List<Post>();
 }

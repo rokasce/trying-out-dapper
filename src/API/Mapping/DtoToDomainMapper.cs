@@ -13,7 +13,7 @@ public static class DtoToDomainMapper
             Id = Id.From(userDto.Id),
             Email = Email.From(userDto.Email),
             FullName = FullName.From(userDto.FullName),
-            DateOfBirth = DateOfBirth.From(DateOnly.FromDateTime(userDto.DateOfBirth))
+            DateOfBirth = DateCreated.From(userDto.DateOfBirth)
         };
     }
 
