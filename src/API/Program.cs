@@ -27,10 +27,12 @@ builder.Services.AddSingleton<DatabaseInitializer>();
 // Repositories
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<IPostRepository, PostRespository>();
+builder.Services.AddSingleton<ICommentRepository, CommentRepository>();
 
 // Services
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IPostService, PostService>();
+builder.Services.AddSingleton<ICommentService, CommentService>();
 
 var app = builder.Build();
 

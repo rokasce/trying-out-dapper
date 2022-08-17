@@ -17,8 +17,8 @@ public class PostRespository : IPostRepository
     {
         var connection = await _connectionFactory.CreateConnectionAsync();
         var result = await connection.ExecuteAsync(
-            @"INSERT INTO Posts (Id, UserId, Title, Content)
-            VALUES (@Id, @UserId, @Title, @Content)",
+            @"INSERT INTO Posts (Id, UserId, Title, Content, CreatedAt)
+            VALUES (@Id, @UserId, @Title, @Content, @CreatedAt)",
             post);
 
         return result > 0;

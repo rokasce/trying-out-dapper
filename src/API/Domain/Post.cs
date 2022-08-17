@@ -9,4 +9,6 @@ public class Post: BaseEntity
     public Title Title { get; init; } = default!;
 
     public Content Content { get; init; } = default!;
+
+    public List<Comment> Comments { get; init; } = new List<Comment>();
 }

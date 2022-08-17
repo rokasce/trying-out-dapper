@@ -13,7 +13,8 @@ public static class DtoToDomainMapper
             Id = Id.From(userDto.Id),
             Email = Email.From(userDto.Email),
             FullName = FullName.From(userDto.FullName),
-            DateOfBirth = DateCreated.From(userDto.DateOfBirth)
+            DateOfBirth = DateCreated.From(userDto.DateOfBirth),
+            CreatedAt = DateCreated.From(userDto.CreatedAt)
         };
     }
 
@@ -25,6 +26,19 @@ public static class DtoToDomainMapper
             UserId = Id.From(postDto.UserId),
             Title = Title.From(postDto.Title),
             Content = Content.From(postDto.Content),
+            CreatedAt = DateCreated.From(postDto.CreatedAt)
+        };
+    }
+
+    public static Comment ToComment(this CommentDto commentDto)
+    {
+        return new Comment
+        {
+            Id = Id.From(commentDto.Id),
+            UserId = Id.From(commentDto.UserId),
+            PostId = Id.From(commentDto.PostId),
+            Content = Content.From(commentDto.Content),
+            CreatedAt = DateCreated.From(commentDto.CreatedAt)
         };
     }
 }

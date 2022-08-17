@@ -11,4 +11,6 @@ public class User : BaseEntity
     public DateCreated DateOfBirth { get; init; } = default!;
 
     public List<Post> Posts { get; init; } = new List<Post>();
+
+    public List<Comment> Comments { get; init; } = new List<Comment>();
 }

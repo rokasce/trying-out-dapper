@@ -28,5 +28,17 @@ public static class DomainToDtoMapper
             CreatedAt = post.CreatedAt.Value,
         };
     }
+
+    public static CommentDto ToCommentDto(this Comment comment) 
+    {
+        return new CommentDto
+        {
+            Id = comment.Id.Value,
+            UserId = comment.UserId.Value,
+            PostId = comment.PostId.Value,
+            Content = comment.Content.Value,
+            CreatedAt = comment.CreatedAt.Value,
+        };
+    }
 }
 

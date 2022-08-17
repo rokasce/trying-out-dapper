@@ -17,8 +17,8 @@ public class UserRepository : IUserRepository
     {
         using var connection = await _connectionFactory.CreateConnectionAsync();
         var result = await connection.ExecuteAsync(
-            @"INSERT INTO Users (Id, FullName, Email, DateOfBirth)
-            VALUES (@Id, @FullName, @Email, @DateOfBirth)",
+            @"INSERT INTO Users (Id, FullName, Email, DateOfBirth, CreatedAt)
+            VALUES (@Id, @FullName, @Email, @DateOfBirth, @CreatedAt)",
             user);
 
         return result > 0;

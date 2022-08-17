@@ -58,5 +58,32 @@ public static class DomainToApiContractMapper
             })
         };
     }
+
+    public static CommentResponse ToCommentResponse(this Comment comment)
+    {
+        return new CommentResponse
+        {
+            Id = comment.Id.Value,
+            UserId = comment.UserId.Value,
+            PostId = comment.PostId.Value,
+            Content = comment.Content.Value,
+            CreatedAt = comment.CreatedAt.Value
+        };
+    }
+
+    public static GetAllCommentsResponse ToCommentsResponse(this IEnumerable<Comment> comments)
+    {
+        return new GetAllCommentsResponse
+        {
+            Comments = comments.Select(comment => new CommentResponse
+            {
+                Id = comment.Id.Value,
+                UserId = comment.UserId.Value,
+                PostId = comment.PostId.Value,
+                Content = comment.Content.Value,
+                CreatedAt = comment.CreatedAt.Value
+            })
+        };
+    }
 }
 

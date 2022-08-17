@@ -51,5 +51,28 @@ public static class ApiContractToDomainMapper
             Content = Content.From(request.Post.Content),
         };
     }
+
+    public static Comment ToComment(this CommentRequest request) 
+    {
+        return new Comment 
+        {
+            Id = Id.From(Guid.NewGuid()),
+            UserId = Id.From(request.UserId),
+            PostId = Id.From(request.PostId),
+            Content = Content.From(request.Content),
+            CreatedAt = DateCreated.From(DateTime.Now)
+        };
+    }
+
+    public static Comment ToComment(this UpdateCommentRequest request) 
+    {
+        return new Comment 
+        {
+            Id = Id.From(Guid.NewGuid()),
+            UserId = Id.From(request.Comment.UserId),
+            PostId = Id.From(request.Comment.PostId),
+            Content = Content.From(request.Comment.Content),
+        };
+    }
 }
 
