@@ -3,12 +3,9 @@ using API.Contracts.Responses;
 using Bogus;
 using FluentAssertions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -30,21 +27,33 @@ public class CreateCommentControllerTests : IClassFixture<UserApiFactory>
     }
 
     [Fact]
-    public async Task Create_CreatesUser_WhenDataIsValid()
+    public async Task Create_ShouldNotCreateComment_WhenUserDoesNotExit()
     {
         // Arrange
         var user = _userGenerator.Generate();
-        var post = new PostRequest 
-        {
-        };
 
         // Act
-        var response = await _client.PostAsJsonAsync("users", user);
+        var userCreateResponse = await _client.PostAsJsonAsync("users", user);
+        var createdUser = await userCreateResponse.Content.ReadFromJsonAsync<UserResponse>();
+        
+        var post = new PostRequest 
+        {
+            UserId = createdUser!.Id,
+            Title = "Test Post #1",
+            Content = "Test Post #1",
+        };
+        var postCreateResponse = await _client.PostAsJsonAsync("posts", post);
+        var createdPost = await postCreateResponse.Content.ReadFromJsonAsync<PostResponse>();
+
+        var comment = new CommentRequest
+        {
+            UserId = Guid.NewGuid(),
+            PostId = createdPost!.Id,
+            Content = "Test Comment #1"
+        };
+        var createCommentResponse = await _client.PostAsJsonAsync("comments", comment);
 
         // Assert
-        var userResponse = await response.Content.ReadFromJsonAsync<UserResponse>();
-        userResponse.Should().BeEquivalentTo(user);
-        response.StatusCode.Should().Be(HttpStatusCode.Created);
-        response.Headers.Location!.ToString().Should().Be($"http://localhost/users/{userResponse!.Id}");
+        createCommentResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
 }

@@ -13,4 +13,6 @@ public interface ICommentRepository
     Task<bool> UpdateAsync(CommentDto comment);
 
     Task<bool> DeleteAsync(Guid id);
+
+    Task<IEnumerable<CommentDto>> GetPostComments(Guid postId);
 }

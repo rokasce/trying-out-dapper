@@ -35,7 +35,7 @@ public class CommentRepository : ICommentRepository
     public async Task<IEnumerable<CommentDto>> GetAllAsync()
     {
         var connection = await _connectionFactory.CreateConnectionAsync();
-        
+
         return await connection.QueryAsync<CommentDto>("SELECT * FROM Comments");
 
     }
@@ -46,6 +46,14 @@ public class CommentRepository : ICommentRepository
 
         return await connection
             .QuerySingleOrDefaultAsync<CommentDto>(@"SELECT * FROM Comments WHERE Id = @Id LIMIT 1", new { Id = id });
+    }
+
+    public async Task<IEnumerable<CommentDto>> GetPostComments(Guid postId)
+    {
+        var connection = await _connectionFactory.CreateConnectionAsync();
+
+        return await connection
+            .QueryAsync<CommentDto>(@"SELECT * FROM Comments WHERE PostId = @Id", new {PostId = postId});
     }
 
     public async Task<bool> UpdateAsync(CommentDto comment)

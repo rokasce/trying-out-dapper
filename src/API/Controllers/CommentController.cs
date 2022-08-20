@@ -48,33 +48,34 @@ public class CommentController : ControllerBase
         return Ok(commentsResponse);
     }
 
-/*    [HttpPut("posts/{id:guid}")]
-    public async Task<IActionResult> Update([FromMultiSource] UpdatePostRequest request)
-    {
-        var existingPost = await _postService.GetAsync(request.Id);
-        if (existingPost is null)
+    /*    [HttpPut("posts/{id:guid}")]
+        public async Task<IActionResult> Update([FromMultiSource] UpdatePostRequest request)
         {
-            return NotFound();
+            var existingPost = await _postService.GetAsync(request.Id);
+            if (existingPost is null)
+            {
+                return NotFound();
+            }
+
+            var post = request.ToPost();
+            await _postService.UpdateAsync(post);
+
+            var postResponse = post.ToPostResponse();
+
+            return Ok(postResponse);
         }
+    */
 
-        var post = request.ToPost();
-        await _postService.UpdateAsync(post);
-
-        var postResponse = post.ToPostResponse();
-
-        return Ok(postResponse);
-    }
-*/
-/*    [HttpDelete("posts/{id:guid}")]
-    public async Task<IActionResult> Delete([FromRoute] Guid id) 
+    [HttpDelete("comments/{id:guid}")]
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
-        var deleted = await _postService.DeleteAsync(id);
-        if (!deleted) 
+        var deleted = await _commentService.DeleteAsync(id);
+        if (!deleted)
         {
             return NotFound();
         }
 
         return Ok();
-    }*/
+    }
 
 }

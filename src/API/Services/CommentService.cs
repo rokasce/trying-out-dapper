@@ -1,4 +1,5 @@
 ﻿using API.Domain;
+using API.Domain.Common;
 using API.Mapping;
 using API.Repositories;
 using FluentValidation;
@@ -9,16 +10,20 @@ namespace API.Services;
 public class CommentService: ICommentService
 {
     private readonly ICommentRepository _commentRepository;
+    private readonly IUserService _userService;
 
-    public CommentService(ICommentRepository commentRepository)
+    public CommentService(ICommentRepository commentRepository, IUserService userService)
     {
         _commentRepository = commentRepository;
+        _userService = userService;
     }
 
     public async Task<bool> CreateAsync(Comment comment)
     {
+        await ValidateIfUserExit(comment);
+
         var existingComment = await _commentRepository.GetAsync(comment.Id.Value);
-        if(existingComment is not null) 
+        if (existingComment is not null)
         {
             var message = $"A comment with id {comment.Id} already exists";
             throw new ValidationException(message, GenerateValidationError(message));
@@ -50,6 +55,8 @@ public class CommentService: ICommentService
 
     public async Task<bool> UpdateAsync(Comment comment)
     {
+        await ValidateIfUserExit(comment);
+
         var commentDto = comment.ToCommentDto();
 
         return await _commentRepository.UpdateAsync(commentDto);
@@ -61,6 +68,19 @@ public class CommentService: ICommentService
         { 
             new ValidationFailure(nameof(Comment), message) 
         };
+    }
+
+    private async Task ValidateIfUserExit(Comment comment)
+    {
+        if (comment.UserId is not null)
+        {
+            var user = await _userService.GetAsync(comment!.UserId.Value);
+            if (user == null)
+            {
+                var message = "A comment without existing user cannot be created";
+                throw new ValidationException(message, GenerateValidationError(message));
+            }
+        }
     }
 }
 
