@@ -11,4 +11,6 @@ public class PostResponse
     public string Content { get; init; } = default!;
 
     public DateTime CreatedAt { get; init; } = default!;
+
+    public List<CommentResponse> Comments { get; init; } = default!;
 }

@@ -10,5 +10,7 @@ public class Post: BaseEntity
 
     public Content Content { get; init; } = default!;
 
+    public User User { get; init; } = default!;
+
     public List<Comment> Comments { get; init; } = new List<Comment>();
 }

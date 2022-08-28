@@ -26,6 +26,7 @@ public static class DomainToDtoMapper
             Title = post.Title.Value,
             Content = post.Content.Value,
             CreatedAt = post.CreatedAt.Value,
+            Comments = post.Comments.Select(x => x.ToCommentDto()).ToList(),
         };
     }
 

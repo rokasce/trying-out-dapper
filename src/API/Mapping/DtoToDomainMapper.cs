@@ -26,7 +26,8 @@ public static class DtoToDomainMapper
             UserId = Id.From(postDto.UserId),
             Title = Title.From(postDto.Title),
             Content = Content.From(postDto.Content),
-            CreatedAt = DateCreated.From(postDto.CreatedAt)
+            CreatedAt = DateCreated.From(postDto.CreatedAt),
+            Comments = postDto.Comments.Select(x => x.ToComment()).ToList(),
         };
     }
 

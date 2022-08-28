@@ -40,7 +40,8 @@ public static class DomainToApiContractMapper
             UserId = post.UserId.Value,
             Title = post.Title.Value,
             Content = post.Content.Value,
-            CreatedAt = post.CreatedAt.Value
+            CreatedAt = post.CreatedAt.Value,
+            Comments = post.Comments.Select(x => x.ToCommentResponse()).ToList(),
         };
     }
 

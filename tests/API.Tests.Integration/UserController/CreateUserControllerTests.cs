@@ -40,4 +40,23 @@ public class CreateUserControllerTests : IClassFixture<UserApiFactory>
         response.StatusCode.Should().Be(HttpStatusCode.Created);
         response.Headers.Location!.ToString().Should().Be($"http://localhost/users/{userResponse!.Id}");
     }
+
+    [Fact]
+    public async Task Create_ReturnsErroredField_WhenDataIsInvalid() 
+    {
+        // Arrange
+        var user = new UserRequest
+        {
+            FullName = "",
+            Email = "notvalidemail",
+            DateOfBirth = System.DateTime.Now
+        };
+
+        // Act
+        var response = await _client.PostAsJsonAsync("users", user);
+
+        // Assert
+        var userResponse = await response.Content.ReadFromJsonAsync<UserResponse>();
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
 }

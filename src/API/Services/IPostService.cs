@@ -8,6 +8,8 @@ public interface IPostService
 
     Task<Post?> GetAsync(Guid id);
 
+    Task<Post?> GetFullAsync(Guid id);
+
     Task<IEnumerable<Post>> GetAllAsync();
 
     Task<bool> UpdateAsync(Post post);

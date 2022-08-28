@@ -11,4 +11,6 @@ public class PostDto
     public string Content { get; set; } = default!;
 
     public DateTime CreatedAt { get; set; } = default!;
+
+    public List<CommentDto> Comments { get; set; } = new List<CommentDto>();
 }

@@ -9,14 +9,18 @@ namespace API.Services;
 public class PostService : IPostService 
 {
     private readonly IPostRepository _postRepository;
+    private readonly IUserService _userService;
 
-    public PostService(IPostRepository postRepository)
+    public PostService(IPostRepository postRepository, IUserService userService)
     {
         _postRepository = postRepository;
+        _userService = userService;
     }
 
     public async Task<bool> CreateAsync(Post post)
     {
+        await ValidateIfUserExit(post);
+
         var existingPost = await _postRepository.GetAsync(post.Id.Value);
         if(existingPost is not null) 
         {
@@ -57,6 +61,8 @@ public class PostService : IPostService
 
     public async Task<bool> UpdateAsync(Post post)
     {
+        await ValidateIfUserExit(post);
+
         var postDto = post.ToPostDto();
 
         return await _postRepository.UpdateAsync(postDto);
@@ -68,6 +74,26 @@ public class PostService : IPostService
         { 
             new ValidationFailure(nameof(Post), message) 
         };
+    }
+
+    private async Task ValidateIfUserExit(Post post)
+    {
+        if (post.UserId is not null)
+        {
+            var user = await _userService.GetAsync(post!.UserId.Value);
+            if (user == null)
+            {
+                var message = "A post without existing user cannot be created";
+                throw new ValidationException(message, GenerateValidationError(message));
+            }
+        }
+    }
+
+    public async Task<Post?> GetFullAsync(Guid id)
+    {
+        var postDto = await _postRepository.GetFullAsync(id);
+
+        return postDto.ToPost();
     }
 }
 

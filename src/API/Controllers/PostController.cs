@@ -77,4 +77,18 @@ public class PostController : ControllerBase
 
         return Ok();
     }
+
+    [HttpGet("posts/getFull/{id:guid}")]
+    public async Task<IActionResult> GetFull([FromRoute] Guid id)
+    {
+        var post = await _postService.GetFullAsync(id);
+        if (post is null)
+        {
+            return NotFound();
+        }
+
+        var postResponse = post.ToPostResponse();
+
+        return Ok(postResponse);
+    }
 }
